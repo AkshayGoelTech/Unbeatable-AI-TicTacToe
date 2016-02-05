@@ -32,19 +32,29 @@ int main()
 	bool compFirst = gameDisplay.isCompFirst();
 	gameStrategy = Strategy(c_symb, p_symb);
 
-	firstMove(compFirst); //Play the first move of the game
+	//Play the first move of the game followed by the player if computer was first
+	firstMove(compFirst); 
+	if (compFirst)
+	{
+		int move;
+		cout << "Enter Position: ";
+		cin >> move;
+		moveAssign(move);
+		gameDisplay.board(pos);
+	}
 
 	//The game now begins
-	int currentTurn;
+	int currentTurn = 2;
 	for (currentTurn = 2; currentTurn < 6; currentTurn++)
 	{
-		//Computer plays its move 
-		//TODO FIXXX
-		if (!(currentTurn == 2 && compFirst))
-			gameStrategy.computerMove(pos, currentTurn);
+		gameStrategy.computerMove(pos, currentTurn);
 		Sleep(500);
 		gameDisplay.board(pos);
 		gameStrategy.checkForWin(pos);
+
+		if ((compFirst) && (currentTurn == 5)) {
+			gameDisplay.gameDraw();
+		}
 
 		//Human can play his move
 		int move;
@@ -64,11 +74,13 @@ int main()
 				cout << "\nYou Cannot Put There!...Enter Again -> ";
 				cin >> move;
 			}
+			cout << "DEBUG: Assigning Symbol";
 		} while (!symbolAssigned);
 
 		//Displaying the game board and then checking if the computer or player won
 		gameDisplay.board(pos);
 		gameStrategy.checkForWin(pos);
+		
 	}
 	
 	/*If nobody wins, the program reaches this part and called gameDraw() 
@@ -148,6 +160,7 @@ bool moveAssign(int posOnBoard)
 		break;
 	default: return false;
 	}
+
 	gameDisplay.board(pos);
 	return(true);
 }

@@ -507,14 +507,14 @@ void Strategy::makeBestMove(char pos[][3])
 {
 	while (true)
 	{
-		time_t t;
-		srand(time(&t));
-		int i = rand() % 3;
-		int j = rand() % 3;
-
-		if (pos[i][j] == ' ') {	
-			pos[i][j] = c_symb;
-			return;
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++)
+			{
+				if (pos[i][j] == ' ') {
+					pos[i][j] = c_symb;
+					return;
+				}
+			}
 		}
 	}
 }
