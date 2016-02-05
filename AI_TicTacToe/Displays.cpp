@@ -8,10 +8,9 @@ using namespace std;
 //Constructor
 Displays::Displays()
 {
-	//Variables initialzied ONLY for faster debugging...remove these later
-	c_symb = 'O';
-	p_symb = 'X';
-	c_first = false;
+	c_symb;
+	p_symb;
+	c_first;
 }
 
 /*
@@ -53,7 +52,7 @@ void Displays::board(char pos[][3])
 }
 
 /*
-Method where we will choose the symbol for the computer and human.
+Method where the symbol for the computer and human will be chosen
 We will also decide if the computer goes first or not
 */
 void Displays::menu()
@@ -68,6 +67,8 @@ void Displays::menu()
 	cout << "\t\t\t   TIC-TAC-TOE PROGRAM\n";
 	cout << "\t\t\t     By:Akshay Goel \n";
 
+	/*Checking if the player wants to see the instructions on how to play 
+	against the computer. If it is their first time, firstTime() will be called*/
 	cout << "\nIs this your First Time playing \nTic Tac Toe against the computer..? (y/n)\n";
 	cin >> option;
 	if (option == 'y' || option == 'Y')
@@ -77,41 +78,77 @@ void Displays::menu()
 		system("cls");
 		firstTime();
 	}
+	else if (option != 'n' && option != 'N')
+	{
+		cout << "\nI dont understand what " << "'" << option << "'";
+		cout<<"means, but I will assume you have already played against me";
+		_getch();
+	}
 
 	system("cls");
 	cout << "Before we begin,";
 	cout << "\nWhat would you like to be? (X) or (O)\n\n";
-	cin >> p_symb;		
-	switch (p_symb)
+	cin >> p_symb;	
+
+	/*Accepting the symbol the player wants to be.
+	The computer keeps asking for a symbol choice till a valid input is made*/
+	boolean askAgain = false;
+	do
 	{
+		if (askAgain) {
+			cout << "\nThat is not an acceptable symbol!\nPlease enter again";
+			cin >> p_symb;
+		}
+
+		switch (p_symb)
+		{
 		case 'X':
 		case 'x':p_symb = 'X';
 			c_symb = 'O';
+			askAgain = false;
 			break;
 		case 'O':
 		case 'o':
 		case '0':p_symb = 'O';
 			c_symb = 'X';
+			askAgain = false;
+		default: askAgain = true;
 			break;
-	}
+		}
+	} while (askAgain);
+	
 
 	cout << "\nSo you will be " << p_symb;
 	cout << "\nAnd I will play as " << c_symb;
 
 	Sleep(500);
+
+	/*Asking if the player wants to make the first move. Repeats until 
+	a valid move is made
+	*/
+	askAgain = true;
 	cout << "\n\n\nNow tell me..Do you want to go first ? (y/n) ";
 	cin >> p_first;
-	switch (p_first)
+	do
 	{
+		switch (p_first)
+		{
 		case 'Y':c_first = false;
+			askAgain = false;
 			break;
 		case 'y':c_first = false;
+			askAgain = false;
 			break;
 		case 'N':c_first = true;
+			askAgain = false;
 			break;
 		case 'n':c_first = true;
+			askAgain = false;
 			break;
-	}
+		default: cout << "\nPlease Enter Again!: ";
+			cin >> p_first;
+		}
+	} while (askAgain);
 	cout << "\n";
 
 	if (!c_first)

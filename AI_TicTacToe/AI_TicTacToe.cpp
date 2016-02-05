@@ -1,16 +1,19 @@
-// AI_TicTacToe.cpp : Defines the entry point for the console application.
-//
+/* AI_TicTacToe.cpp : Defines the entry point for the console application.
+Program created by Akshay Goel (akshaygoel1@gmail.com).
+Note: sleep(int) has been included in several places solely to make it look like the computer is thinking.
+*/
 
 #include "stdafx.h"
 #include <iostream>
 #include <Windows.h>
 
 using namespace std;
-//
+
+
 //Global Declarations
 char pos[3][3] = { ' ',' ',' ',' ',' ',' ',' ',' ', ' ' };
-char c_symb;
-char p_symb;
+char c_symb; //character symbol
+char p_symb; //player symbol
 Displays gameDisplay;
 Strategy gameStrategy;
 
@@ -20,7 +23,8 @@ bool moveAssign(int);
 
 int main()
 {
-	//gameDisplay.menu(); Disabled for faster debugging
+	//Displaying the intro screen, choice menu, and game board
+	gameDisplay.menu();
 	gameDisplay.board(pos);
 
 	c_symb = gameDisplay.getCSymb();
@@ -28,19 +32,28 @@ int main()
 	bool compFirst = gameDisplay.isCompFirst();
 	gameStrategy = Strategy(c_symb, p_symb);
 
-	firstMove(compFirst);
+	firstMove(compFirst); //Play the first move of the game
 
+	//The game now begins
 	int currentTurn;
 	for (currentTurn = 2; currentTurn < 6; currentTurn++)
 	{
-		gameStrategy.computerMove(pos, currentTurn);
+		//Computer plays its move 
+		//TODO FIXXX
+		if (!(currentTurn == 2 && compFirst))
+			gameStrategy.computerMove(pos, currentTurn);
 		Sleep(500);
 		gameDisplay.board(pos);
 		gameStrategy.checkForWin(pos);
 
+		//Human can play his move
 		int move;
 		cout << "Enter Position: ";
 		cin >> move;
+
+		/*Loop in place to make sure the human player plays a legal move.
+		A legal move can only be played on en empty, unoccupied spot
+		*/
 		bool symbolAssigned = false;
 		do
 		{
@@ -52,15 +65,22 @@ int main()
 				cin >> move;
 			}
 		} while (!symbolAssigned);
+
+		//Displaying the game board and then checking if the computer or player won
 		gameDisplay.board(pos);
 		gameStrategy.checkForWin(pos);
 	}
-
+	
+	/*If nobody wins, the program reaches this part and called gameDraw() 
+	which declares a draw and ends game*/
 	gameDisplay.gameDraw();
 	_getch();
     return 0;
 }
 
+/*Method to play the first move.
+@param compFirst true if the computer is first.
+*/
 void firstMove(bool compFirst)
 {
 	int move;
@@ -81,6 +101,11 @@ void firstMove(bool compFirst)
 	}
 }
 
+/*Method used to assign the player's symbol to a position on
+the board
+@param posOnBoard The position where the player has asked to place his symbol
+@return returns true if symbol was succesfully placed. False if the position was already taken
+*/
 bool moveAssign(int posOnBoard)
 {
 	switch (posOnBoard)
