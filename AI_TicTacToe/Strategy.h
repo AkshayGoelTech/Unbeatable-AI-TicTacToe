@@ -1,4 +1,9 @@
 #pragma once
+
+#include <iostream>
+/*Class made by Akshay Goel (akshaygoel1@gmail.com).
+This class contains methods for the different strategies which the computer
+employs to beat the human player. This is the core AI code of the program*/
 class Strategy
 {
 	char c_symb;
@@ -19,8 +24,6 @@ public:
 	bool strategyBeta(char[][3], int);
 	bool strategyGamma(char[][3]);
 	void makeBestMove(char[][3]);
-
-
 	~Strategy();
 };
 

@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Strategy.h"
-#include <iostream>
+//#include <iostream>
 #include <random>
 #include <time.h>
 
@@ -16,6 +16,11 @@ Strategy::Strategy(char comp, char player)
 	p_symb = player;
 }
 
+/*This is the method called by our main funcion everytime the computer
+has to make its move. Each innrer method has been placed based on priority.
+The methods called first have a higher prioirty than the ones below. On performing
+the method, if the computer has NOT played a move, then the method has failed.
+Hence moveDone will get a false value*/
 void Strategy::computerMove(char pos[][3], int turn)
 {
 	if (pos[1][1] == ' ')

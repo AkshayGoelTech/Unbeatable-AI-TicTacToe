@@ -32,7 +32,7 @@ int main()
 	bool compFirst = gameDisplay.isCompFirst();
 	gameStrategy = Strategy(c_symb, p_symb);
 
-	//Play the first move of the game followed by the player if computer was first
+	//Play the first move of the game followed by tuhe player if computer was first
 	firstMove(compFirst); 
 	if (compFirst)
 	{
