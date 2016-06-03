@@ -5,5 +5,5 @@ The game ends up being either a draw or a win for the computer. It has been code
 I would appreciate it if you could provide constructive feedback on how can I remove redundant code (if there is), make it faster, more readable or really any improvements you can see!
 
 ## Download Instructions
-Clone the repository and run <b>AI_TicTacToe.exe</b> .
+Clone the repository or download the zip and run <b>AI_TicTacToe.exe</b> .
 Thats all!
