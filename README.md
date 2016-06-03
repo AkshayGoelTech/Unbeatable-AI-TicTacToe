@@ -7,3 +7,8 @@ I would appreciate it if you could provide constructive feedback on how can I re
 ## Download Instructions
 Clone the repository or download the zip and run <b>AI_TicTacToe.exe</b> .
 Thats all!
+
+### Some Features
+Human Player can go first or let the computer play the first move. <br>
+Well designed interactive text-base interface present. <br>
+Player can never win against this AI. <br>
