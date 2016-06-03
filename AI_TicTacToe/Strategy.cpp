@@ -39,52 +39,44 @@ void Strategy::computerMove(char pos[][3], int turn)
 	moveDone = winMove(pos);
 	if (moveDone)
 	{
-		cout << "\nwinMove returned true"; _getch();
 		return;
 	}
 
 	moveDone = winBlock(pos);
 	if (moveDone)
 	{
-		cout << "\nwinBlock returned true"; _getch();
 		return;
 	}
 
 	moveDone = blockFork2(pos);
 	if (moveDone)
 	{
-		cout << "\nBlockFork2 returned true"; _getch();
 		return;
 	}
 
 	moveDone = makeFork1(pos);
 	if (moveDone)
 	{
-		cout << "\makeFork1 returned true"; _getch();
 		return;
 	}
 
 	moveDone = blockFork1(pos, turn);
 	if (moveDone) {
-		cout << "\nblockfork1 returned true"; _getch();
 		return;
 	}
 
 	moveDone = strategyAlpha(pos);
 	if (moveDone) {
-		cout << "\nStrategy Alpha returned true"; _getch();
 		return;
 	}
 
 	moveDone = strategyBeta(pos, turn);
 	if (moveDone) {
-		cout << "\nStrategy Beta returned true"; _getch();
 		return;
 	}
 
 	moveDone = strategyGamma(pos);
 	if (moveDone) {
-		cout << "\nStrategy Gamma returned true"; _getch();
 		return;
 	}
 

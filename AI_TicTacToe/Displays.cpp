@@ -112,6 +112,7 @@ void Displays::menu()
 		case '0':p_symb = 'O';
 			c_symb = 'X';
 			askAgain = false;
+			break;
 		default: askAgain = true;
 			break;
 		}
